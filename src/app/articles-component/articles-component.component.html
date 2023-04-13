@@ -1,0 +1,45 @@
+<h1>{{ titre }}</h1>
+<div *ngFor="let e of listeArticles">
+    {{e.titre}}
+    {{e.contenu}}
+    {{e.auteur}}
+    {{e.date}}
+    {{e.categorie}}
+</div>
+<hr>
+<div *ngFor="let e of listeArticles">
+    <div *ngIf="e.categorie !== 'Travail'">
+        <fieldset><legend>{{e.titre}}</legend>
+        {{e.contenu}}
+        {{e.auteur}}
+        {{e.date}}
+        {{e.categorie}}</fieldset>
+    </div>
+</div>
+<hr>
+<div *ngFor="let e of listeArticles">
+    <div [ngStyle]="{'backgroundColor':e.categorie=='Education' ? 'blue':'white'}">
+
+        <fieldset><legend>{{e.titre}}</legend>
+        {{e.contenu}}
+        {{e.auteur}}
+        {{e.date}}
+        {{e.categorie}}</fieldset>
+    </div>
+</div>
+<hr>
+<div *ngFor="let e of filtredArticles">
+    <div [ngStyle]="{'backgroundColor':e.categorie=='Education' ? 'blue':'white'}">
+        <div *ngIf="e.categorie!='Travail'">
+        <fieldset><legend>{{e.titre}}</legend>
+        {{e.contenu}}
+        {{e.auteur}}
+        {{e.date}}
+        {{e.categorie}}</fieldset>
+        </div>
+    </div>
+</div>
+<div>
+    <input type="text" placeholder={{listeArticles.length}} [(ngModel)]="infrOuegal" (keyup)="changeTheArray()">
+    {{infrOuegal}}
+</div>

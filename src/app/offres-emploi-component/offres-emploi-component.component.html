@@ -1,0 +1,31 @@
+<h1>Yosri BEN SAAD TODO</h1>
+<br>
+<br>
+<h3>Exercice 1</h3>
+<div>
+    <div *ngFor="let e of ListeEmploi">
+        {{e.reference}}
+        {{e.titre}}
+        {{e.entreprise}}
+        {{e.etat}}
+        <input type="submit" value="postuler" [disabled]="e.etat==false">
+    </div>
+    <hr>
+    <div>
+        <button (click)="Bilan()">Bilan</button>
+    </div>
+    <hr>
+    <div>
+        <input type="text" [(ngModel)]="search">
+        <div *ngFor="let e of ListeEmploi">
+            <div *ngIf="e.entreprise==search ||search==''">
+                {{e.reference}}
+                {{e.titre}}
+                {{e.entreprise}}
+                {{e.etat}}
+            </div>
+        </div>
+    </div>
+</div>
+<h3>Exercice 2</h3>
+<app-articles-component></app-articles-component>
