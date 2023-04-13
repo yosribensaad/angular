@@ -1,0 +1,83 @@
+<div>
+    <div>
+        <fieldset>
+            <form #form="ngForm">
+                <legend> Informations générales </legend>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>nom</td>
+                            <td><input type="text" name="name" ngModel #name="ngModel" required /></td>
+                        </tr>
+                        <tr>
+                            <div *ngIf="name.touched && !name.valid">
+                                <div class="err" *ngIf="name.errors?.['required']">obligatoire</div>
+                            </div>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><input type="text" name="email" ngModel #email="ngModel" required
+                                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3}$" /></td>
+                        </tr>
+                        <tr>
+                            <div *ngIf="email.dirty && !email.valid || email.touched">
+                                <div class="err" *ngIf="email.errors?.['required']">obligatoire</div>
+                                <div class="err" *ngIf="email.errors?.['pattern']">email should be like
+                                    (example@domaine.exp)</div>
+                            </div>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <fieldset>
+                        <legend> Informationsde payement </legend>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Type de carte</td>
+                                    <td><input type="text" name="typecarte" ngModel #typecarte="ngModel" required />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <div *ngIf="typecarte.touched ">
+                                        <div class="err" *ngIf="typecarte.errors?.['required']">obligatoire</div>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <td>Numméro de carte</td>
+                                    <td><input type="text" name="numcarte" ngModel #numcarte="ngModel" required
+                                            minlength="16" maxlength="16" /></td>
+                                </tr>
+                                <tr>
+                                    <div
+                                        *ngIf="numcarte.touched  || numcarte.errors?.['minlength'] &&  numcarte.errors?.['maxlength']">
+                                        <div class="err" *ngIf="numcarte.errors?.['required']">obligatoire</div>
+                                        <div class="err" *ngIf="numcarte.errors?.['minlength']">champ de 16 numéro</div>
+                                        <div class="err" *ngIf="numcarte.errors?.['maxlength']">champ de 16 numéro</div>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <td>Date expiration</td>
+                                    <td><input type="text" name="dateexp" ngModel #dateexp="ngModel" required /></td>
+                                </tr>
+                                <tr>
+                                    <div *ngIf="dateexp.touched ">
+                                        <div class="err" *ngIf="dateexp.errors?.['required']">obligatoire</div>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <td>Code</td>
+                                    <td><input type="text" name="code" ngModel #code="ngModel" [hidden]="!typecarte.valid || !numcarte.valid || !dateexp.valid" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+                <br>
+                <div>
+                    <input type="button" value="Ajouter" [disabled]="!form.valid">
+                </div>
+            </form>
+        </fieldset>
+    </div>
+</div>
